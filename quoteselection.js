@@ -27,11 +27,42 @@ $(document).ready(function() {
             quoteButton = document.createElement("a");
             quoteButton.style.display = "none";
             quoteButton.id = "quoteButton";
-            quoteButton.href = "#";
-            document.body.insertBefore(quoteButton);
+            quoteButton.href = "#Form_Comment";
+            document.body.insertBefore(quoteButton, document.body.firstChild);
+            $("#quoteButton").text(gdn.definition("qsQuote")).click(function(e){
+                body = $("#Form_Body").val();
+                if (body!='') {
+                    body += "\n\n";
+                }
+                resetCommentForm();
+                $("#Form_Body").val(body + getQuoteText()).focus();
+                $("#quoteButton").hide();
+            });
         }
-        return $("#quoteButton").css({position:"absolute",left:e.pageX,top:e.pageY}).text("quote").click(function(e){
-            $("#Form_Body").val($("#Form_Body").val()+"\n\n> [comment from " + quoteData.name + "](" + quoteData.url + ")  \n" + quoteData.text);
-        });
+        return $("#quoteButton").css({position:"absolute",left:e.pageX,top:e.pageY});
+    }
+
+    getQuoteText = function() {
+        title = gdn.definition('qsQuoteText').replace('%s', quoteData.name);
+        url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
+        switch (gdn.definition('qsInputFormatter','Html')) {
+            case "Markdown":
+                return "> *[" + title + "](" + url + ")*  \n" + quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") + "\n\n";
+            case "BBCode":
+                return "[quote][i][url=" + url + "]" + title + "[/url][/i]\n" + quoteData.text + "[/quote]\n\n";
+                break
+            default:
+                return "<blockquote><i><a href=\"" + url + "\">" + title + "</a></i>\n" + quoteData.text + "</blockquote>\n\n";
+                break;
+        }
+    }
+    
+    function resetCommentForm() {
+        var parent = $('div.CommentForm');
+        $(parent).find('li.Active').removeClass('Active');
+        $('a.WriteButton').parents('li').addClass('Active');
+        $(parent).find('div.Preview').remove();
+        $(parent).find('textarea').show();
+        $('span.TinyProgress').remove();
     }
 });
