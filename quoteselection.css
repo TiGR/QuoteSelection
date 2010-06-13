@@ -4,7 +4,7 @@
    margin: 3px 4px 0 0;
    font-size: 10px;
    font-weight: normal;
-   background: url('images/buttonbg.png') repeat-x center left #f8f8f8;
+   background: url('./../../applications/dashboard/design/images/buttonbg.png') repeat-x center left #f8f8f8;
    border: 1px solid #bbb;
    -moz-border-radius: 2px;
    -webkit-border-radius: 2px;
@@ -19,14 +19,4 @@
 }
 #quoteButton:focus {
    background: #eee;
-}
-#quoteButton:hover,
-#quoteButton {
-   color: #fff;
-   background: #9c9c9c !important;
-   border: 1px solid #9c9c9c;
-   -moz-border-radius-bottomleft: 0;
-   -moz-border-radius-bottomright: 0;
-   -webkit-border-bottom-left-radius: 0;
-   -webkit-border-bottom-right-radius: 0;
 }
