@@ -1,19 +1,18 @@
 $(document).ready(function() {
     quoteData = {};
     // we use "mouseup" event since Chrome does not work with "select" one.
-    $("ul.Discussion div.Message").mouseup(function(e){
-        quoteButton = getQuoteButton(e);
-        quoteButton.hide();
-        quoteData = {};
+    $("ul.Discussion div.Comment").mouseup(function(e){
         if (txt = window.getSelection)
             txt = window.getSelection().toString();
         else
             txt = document.selection.createRange().text;
+        quoteButton = getQuoteButton(e);
+        quoteData = {};
         if (!txt)
             // no text selected.
             return;
 
-        meta = $(e.currentTarget).siblings(".Meta");
+        meta = $(e.currentTarget).find(".Meta");
         name = meta.find(".Author").text().trim();
         url = meta.find(".Permalink a").attr("href");
     
@@ -39,7 +38,7 @@ $(document).ready(function() {
                 $("#quoteButton").hide();
             });
         }
-        return $("#quoteButton").css({position:"absolute",left:e.pageX,top:e.pageY});
+        return $("#quoteButton").css({display:"none",position:"absolute",left:e.pageX,top:e.pageY});
     }
 
     // returns quotation formatted according current InputFormatter setting

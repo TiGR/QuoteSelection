@@ -16,10 +16,10 @@ class QuoteSelection implements Gdn_IPlugin {
         if ($Sender->ControllerName != 'discussioncontroller')
             return;
         $Sender->AddJsFile('/plugins/QuoteSelection/quoteselection.js');
-        $Sender->AddCssFile('plugins/GettingStarted/style.css');
-        $Sender->AddDefinition('QS.InputFormatter', Gdn::Config('Garden.InputFormatter'));
-        $Sender->AddDefinition("QS.Quote", T('Quote'));
-        $Sender->AddDefinition("QS.QuoteText", T('Comment by %s'));
+        $Sender->AddCssFile('plugins/QuoteSelection/quoteselection.css');
+        $Sender->AddDefinition('qsInputFormatter', Gdn::Config('Garden.InputFormatter'));
+        $Sender->AddDefinition("qsQuote", T('Quote'));
+        $Sender->AddDefinition("qsQuoteText", T('Comment by %s'));
     }
     
     public function Setup() {}
