@@ -17,8 +17,6 @@ $(document).ready(function() {
         url = meta.find(".Permalink a").attr("href");
     
         quoteData = {text: txt, name:name, url:url}
-        console.log(e);
-        console.log(quoteData);
         quoteButton.show();
     });
 
