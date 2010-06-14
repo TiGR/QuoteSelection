@@ -1,6 +1,7 @@
 $(document).ready(function() {
     quoteData = {};
-    $("ul.Discussion div.Message").unbind().mouseup(function(e){
+    // we use "mouseup" event since Chrome does not work with "select" one.
+    $("ul.Discussion div.Message").mouseup(function(e){
         quoteButton = getQuoteButton(e);
         quoteButton.hide();
         quoteData = {};
@@ -20,6 +21,7 @@ $(document).ready(function() {
         quoteButton.show();
     });
 
+    // Creates or returns (if it already exists) "Quote" button, and sets it's position
     getQuoteButton = function(e) {
         if (!document.getElementById("quoteButton")) {
             quoteButton = document.createElement("a");
@@ -40,8 +42,10 @@ $(document).ready(function() {
         return $("#quoteButton").css({position:"absolute",left:e.pageX,top:e.pageY});
     }
 
+    // returns quotation formatted according current InputFormatter setting
     getQuoteText = function() {
         title = gdn.definition('qsQuoteText').replace('%s', quoteData.name);
+        // trim down domain part to make links shorter
         url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
         switch (gdn.definition('qsInputFormatter','Html')) {
             case "Markdown":
@@ -55,6 +59,7 @@ $(document).ready(function() {
         }
     }
     
+    // shows Comment textarea if it is not already displayed.
     function resetCommentForm() {
         var parent = $('div.CommentForm');
         $(parent).find('li.Active').removeClass('Active');
