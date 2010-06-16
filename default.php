@@ -4,7 +4,7 @@
 $PluginInfo['QuoteSelection'] = array(
     'Name' => 'Quote selection',
     'Description' => "Provides a simple tool to quote posts. Users can select text some comment text and click &quot;quote&quot; button that would appear te get formatted quote.",
-    'Version' => '0.1',
+    'Version' => '0.2',
     'Author' => "Igor Tarasov",
     'AuthorEmail' => 'tarasov.igor@gmail.com',
     'AuthorUrl' => 'http://polosatus.ru',
@@ -19,7 +19,7 @@ class QuoteSelection implements Gdn_IPlugin {
         $Sender->AddCssFile('plugins/QuoteSelection/quoteselection.css');
         $Sender->AddDefinition('qsInputFormatter', Gdn::Config('Garden.InputFormatter'));
         $Sender->AddDefinition("qsQuote", T('Quote'));
-        $Sender->AddDefinition("qsQuoteText", T('Comment by %s'));
+        $Sender->AddDefinition("qsQuoteText", T('%s said'));
     }
     
     public function Setup() {}
