@@ -49,10 +49,10 @@ $(document).ready(function() {
     // returns quotation formatted according current InputFormatter setting
     getQuoteText = function() {
         title = gdn.definition('qsQuoteText').replace('%s', quoteData.author);
-        // trim down domain part to make links shorter
-        url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
         switch (gdn.definition('qsInputFormatter','Html')) {
             case "Markdown":
+                // trim down domain part to make links shorter
+                url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
                 return "> [" + title + "](" + url + "): " + quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") + "\n\n";
             case "BBCode":
                 return "[quote][url=" + url + "]" + title + "[/url]: " + quoteData.text + "[/quote]\n\n";
