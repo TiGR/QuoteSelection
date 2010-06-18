@@ -1,4 +1,4 @@
-Quote Selection plugin version 0.2 for Vanilla 2
+Quote Selection plugin version 0.3 for Vanilla 2
 
 # About #
 
