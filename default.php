@@ -13,8 +13,12 @@ $PluginInfo['QuoteSelection'] = array(
 class QuoteSelection implements Gdn_IPlugin {
 
     public function Base_Render_Before(&$Sender) {
-        if ($Sender->ControllerName != 'discussioncontroller')
+        $Session = Gdn::Session();
+        
+        if ($Session->UserID == 0 or $Sender->ControllerName != 'discussioncontroller')
+            // we enable this feature only for logged in users and only on discussion page
             return;
+
         $Sender->AddJsFile('/plugins/QuoteSelection/quoteselection.js');
         $Sender->AddCssFile('plugins/QuoteSelection/quoteselection.css');
         $Sender->AddDefinition('qsInputFormatter', Gdn::Config('Garden.InputFormatter'));
