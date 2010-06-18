@@ -17,6 +17,16 @@ following strings to definitions.php file:
     $Definition["Quote"] = "<Quote Button text>";
     $Definition["%s said"] = "<Text for quote title>";
 
+# Known Issues #
+
+- Button won't appear if user has finished selection somewhere out of comment element box.
+
+# Changes #
+
+## 0.3 [2010.06.18] ##
+
+* Make this feature work only for registered users.
+
 # License #
 
 This code is licensed under GPL free license.
