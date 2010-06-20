@@ -55,10 +55,10 @@ $(document).ready(function() {
                 url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
                 return "> [" + title + "](" + url + "): " + quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") + "\n\n";
             case "BBCode":
-                return "[quote][url=" + url + "]" + title + "[/url]: " + quoteData.text + "[/quote]\n\n";
+                return "[quote][url=" + quoteData.url + "]" + title + "[/url]: " + quoteData.text + "[/quote]\n\n";
                 break
             default:
-                return "<blockquote><a href=\"" + url + "\">" + title + "</a>: " + quoteData.text + "</blockquote>\n\n";
+                return "<blockquote><a href=\"" + quoteData.url + "\">" + title + "</a>: " + quoteData.text + "</blockquote>\n\n";
                 break;
         }
     }
