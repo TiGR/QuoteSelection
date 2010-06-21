@@ -23,6 +23,15 @@ $(document).ready(function() {
         }
         quoteButton.show();
     });
+    
+    // Replace absolute comment links with relative where possible
+    $("ul.Discussion div.Message blockquote a").each(function(i,el) {
+        if (el.href.indexOf(gdn.definition("WebRoot") + "/discussion/comment/") === 0) {
+            if ($(el.hash).length == 1) {
+                el.href = el.hash;
+            }
+        }
+    });
 
     // Creates or returns (if it already exists) "Quote" button, sets it's position. and hides it if it was displayed.
     getQuoteButton = function(e) {
