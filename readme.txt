@@ -1,4 +1,4 @@
-Quote Selection plugin version 0.4 for Vanilla 2
+Quote Selection plugin version 0.5 for Vanilla 2
 
 # About #
 
@@ -22,6 +22,13 @@ following strings to definitions.php file:
 - Button won't appear if user has finished selection somewhere out of comment element box.
 
 # Changes #
+
+## 0.5 [2010.06.24] ##
+
+* Automatically convert absolute links to anchors only, so that user could jump to comments that are 
+    on current page without page reload.
+* Small optimization - use DiscussionController_RenderBefore instead of Base_Render_Before.
+* JS code rewrite in order to make it reusable, object quoteSelection added.
 
 ## 0.4 [2010.06.20] ##
 
