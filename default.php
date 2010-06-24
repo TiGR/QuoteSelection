@@ -12,10 +12,10 @@ $PluginInfo['QuoteSelection'] = array(
 
 class QuoteSelection implements Gdn_IPlugin {
 
-    public function Base_Render_Before(&$Sender) {
+    public function DiscussionController_Render_Before(&$Sender) {
         $Session = Gdn::Session();
         
-        if ($Session->UserID == 0 or $Sender->ControllerName != 'discussioncontroller')
+        if ($Session->UserID == 0)
             // we enable this feature only for logged in users and only on discussion page
             return;
 
