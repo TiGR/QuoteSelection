@@ -21,7 +21,7 @@ class QuoteSelection implements Gdn_IPlugin {
 
         $Sender->AddJsFile('/plugins/QuoteSelection/quoteselection.js');
         $Sender->AddCssFile('plugins/QuoteSelection/quoteselection.css');
-        $Sender->AddDefinition('qsInputFormatter', Gdn::Config('Garden.InputFormatter'));
+        $Sender->AddDefinition('qsInputFormatter', strtolower(Gdn::Config('Garden.InputFormatter')));
         $Sender->AddDefinition("qsQuote", T('Quote'));
         $Sender->AddDefinition("qsQuoteText", T('%s said'));
     }

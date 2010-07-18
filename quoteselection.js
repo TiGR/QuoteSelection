@@ -63,17 +63,18 @@ quoteSelection = {
     // returns quotation formatted according current InputFormatter setting
     getQuoteText: function() {
         title = gdn.definition('qsQuoteText').replace('%s', quoteData.author);
-        switch (gdn.definition('qsInputFormatter','Html')) {
-            case "Markdown":
+        switch (gdn.definition('qsInputFormatter','html')) {
+            case "markdown":
                 // trim down domain part to make links shorter
                 url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
                 return "> [" + title + "](" + url + "): " + quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") + "\n\n";
-            case "BBCode":
+
+            case "bbcode":
                 return "[quote][url=" + quoteData.url + "]" + title + "[/url]: " + quoteData.text + "[/quote]\n\n";
-                break
+
+            case "html":
             default:
                 return "<blockquote><a href=\"" + quoteData.url + "\">" + title + "</a>: " + quoteData.text + "</blockquote>\n\n";
-                break;
         }
     },
     
