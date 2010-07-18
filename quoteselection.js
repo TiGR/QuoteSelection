@@ -22,7 +22,7 @@ quoteSelection = {
                 return;
             quoteData = {
                 text: txt,
-                author: quoteSelection.trim(meta.find(".Author").text()),
+                author: $.trim(meta.find(".Author").text()),
                 url: meta.find(".Permalink a").attr("href")
             }
             quoteButton.show();
@@ -85,13 +85,6 @@ quoteSelection = {
         $(parent).find('div.Preview').remove();
         $(parent).find('textarea').show();
         $('span.TinyProgress').remove();
-    },
-
-    trim: function(str) {
-        if (typeof str.trim == "function")
-            return str.trim();
-         // IE is not aware of trim function, so we have to use this lame stuff
-        return str.replace(/^\s+/g,'').replace(/\s+$/g,'');
     }
 }
 
