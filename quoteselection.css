@@ -11,6 +11,7 @@
    color: #555;
    cursor: pointer;
    line-height: 100%;
+   z-index: 10000;
 }
 #quoteButton:focus,
 #quoteButton:hover {

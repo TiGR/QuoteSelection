@@ -4,6 +4,7 @@ quoteSelection = {
     quoteButton: null,
     
     init: function() {
+        // we use "mouseup" event since Chrome does not work with "select" one.
         $("body").mouseup(function(e){
             if (txt = window.getSelection)
                 txt = window.getSelection().toString();
@@ -29,9 +30,9 @@ quoteSelection = {
         
         quoteSelection.replaceLinks();
         
-        // replace links when new comments get added to page with AJAX.
-        $(document).bind('CommentPagingComplete', {}, quoteSelection.replaceLinks)
-                   .bind('CommentAdded', {}, quoteSelection.replaceLinks);
+        // replace links when new comments get loaded with morepager.
+        $(document).bind('CommentPagingComplete', {}, quoteSelection.replaceLinks);
+        $(document).bind('CommentAdded', {}, quoteSelection.replaceLinks);
     },
     
     // Replace absolute comment links with relative where possible

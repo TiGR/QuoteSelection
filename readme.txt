@@ -1,4 +1,4 @@
-Quote Selection plugin version 0.5 for Vanilla 2
+Quote Selection plugin version 0.6 for Vanilla 2
 
 # About #
 
@@ -22,6 +22,10 @@ following strings to definitions.php file:
 - Button won't appear if user has finished selection somewhere out of comment element box.
 
 # Changes #
+
+## 0.6 [2010.07.21] ##
+
+* Minor fixes.
 
 ## 0.5 [2010.06.24] ##
 
