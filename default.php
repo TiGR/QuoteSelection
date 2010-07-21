@@ -4,7 +4,7 @@
 $PluginInfo['QuoteSelection'] = array(
     'Name' => 'Quote selection',
     'Description' => "Provides a simple tool to quote posts. Users can select text some comment text and click &quot;quote&quot; button that would appear te get formatted quote.",
-    'Version' => '0.5',
+    'Version' => '0.6',
     'HasLocale' => TRUE,
     'Author' => "Igor Tarasov",
     'AuthorEmail' => 'tarasov.igor@gmail.com',
