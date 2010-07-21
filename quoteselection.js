@@ -4,7 +4,6 @@ quoteSelection = {
     quoteButton: null,
     
     init: function() {
-        // we use "mouseup" event since Chrome does not work with "select" one.
         $("body").mouseup(function(e){
             if (txt = window.getSelection)
                 txt = window.getSelection().toString();
@@ -28,10 +27,18 @@ quoteSelection = {
             quoteButton.show();
         });
         
-        // Replace absolute comment links with relative where possible
+        quoteSelection.replaceLinks();
+        
+        // replace links when new comments get added to page with AJAX.
+        $(document).bind('CommentPagingComplete', {}, quoteSelection.replaceLinks)
+                   .bind('CommentAdded', {}, quoteSelection.replaceLinks);
+    },
+    
+    // Replace absolute comment links with relative where possible
+    replaceLinks: function() {
         $("ul.Discussion div.Message blockquote a").each(function(i,el) {
-            if (el.href.indexOf(gdn.definition("WebRoot") + "/discussion/comment/") === 0) {
-                if ($(el.hash).length == 1) {
+            if (el.href.indexOf(gdn.combinePaths(gdn.definition('WebRoot', ''), "discussion/comment/") === 0) {
+                if (el.hash && $(el.hash).length) {
                     el.href = el.hash;
                 }
             }
