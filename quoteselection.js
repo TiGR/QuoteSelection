@@ -38,7 +38,7 @@ quoteSelection = {
     // Replace absolute comment links with relative where possible
     replaceLinks: function() {
         $("ul.Discussion div.Message blockquote a").each(function(i,el) {
-            if (el.href.indexOf(gdn.combinePaths(gdn.definition('WebRoot', ''), "discussion/comment/") === 0) {
+            if (el.href.indexOf(gdn.combinePaths(gdn.definition('WebRoot', ''), "discussion/comment/")) === 0) {
                 if (el.hash && $(el.hash).length) {
                     el.href = el.hash;
                 }
