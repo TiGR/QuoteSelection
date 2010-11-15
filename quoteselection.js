@@ -14,18 +14,19 @@ quoteSelection = {
             quoteButton = quoteSelection.getQuoteButton(e);
             if (!txt)
                 // no text selected.
-                return;
+                return true;
 
             meta = $(e.target).parents("li.Comment").find(".Meta");
             if (meta.length==0) 
                 // selected text does not belong to comments
-                return;
+                return true;
             quoteData = {
                 text: txt,
                 author: $.trim(meta.find(".Author").text()),
                 url: meta.find(".Permalink a").attr("href")
             }
             quoteButton.show();
+            return false;
         });
         
         quoteSelection.replaceLinks();
@@ -38,7 +39,8 @@ quoteSelection = {
     // Replace absolute comment links with relative where possible
     replaceLinks: function() {
         $("ul.Discussion div.Message blockquote a").each(function(i,el) {
-            if (el.href.indexOf(gdn.combinePaths(gdn.definition('WebRoot', ''), "discussion/comment/")) === 0) {
+            if (el.href.indexOf(gdn.combinePaths(gdn.definition('WebRoot', ''),
+                "discussion/comment/")) === 0) {
                 if (el.hash && $(el.hash).length) {
                     el.href = el.hash;
                 }
@@ -59,41 +61,42 @@ quoteSelection = {
                 if (body!='') {
                     body += "\n\n";
                 }
-                quoteSelection.resetCommentForm();
+                $("#Form_Body").parents("div.CommentForm").trigger("resetCommentForm");
                 $("#Form_Body").val(body + quoteSelection.getQuoteText()).focus();
                 $("#quoteButton").hide();
                 return false;
             });
         }
-        return $("#quoteButton").css({display:"none",position:"absolute",left:e.pageX,top:e.pageY});
+        return $("#quoteButton").css({
+            display: "none",
+            position: "absolute",
+            left: e.pageX,
+            top: e.pageY
+        });
     },
 
     // returns quotation formatted according current InputFormatter setting
     getQuoteText: function() {
+        visualEditorMode = ((window.tinyMCE !== undefined) || ($.cleditor));
         title = gdn.definition('qsQuoteText').replace('%s', quoteData.author);
         switch (gdn.definition('qsInputFormatter','html')) {
             case "markdown":
                 // trim down domain part to make links shorter
                 url = quoteData.url.replace(/^https?:\/\/[^\/]*/, '');
-                return "> [" + title + "](" + url + "): " + quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") + "\n\n";
+                return "> [" + title + "](" + url + "): " +
+                    quoteData.text.replace("\r", "").replace(/\n{2,}/gm, "\n\n>") +
+                    "\n\n";
 
             case "bbcode":
-                return "[quote][url=" + quoteData.url + "]" + title + "[/url]: " + quoteData.text + "[/quote]\n\n";
+                return "[quote][url=" + quoteData.url + "]" + title + "[/url]: " +
+                    quoteData.text + "[/quote]\n\n";
 
             case "html":
             default:
-                return "<blockquote><a href=\"" + quoteData.url + "\">" + title + "</a>: " + quoteData.text + "</blockquote>\n\n";
+                return "<blockquote><a href=\"" + quoteData.url + "\">" + title +
+                    "</a>: " + quoteData.text + "</blockquote>" +
+                    (visualEditorMode ? "<p>" : "\n\n");
         }
-    },
-    
-    // shows Comment textarea if it is not already displayed.
-    resetCommentForm: function () {
-        var parent = $('div.CommentForm');
-        $(parent).find('li.Active').removeClass('Active');
-        $('a.WriteButton').parents('li').addClass('Active');
-        $(parent).find('div.Preview').remove();
-        $(parent).find('textarea').show();
-        $('span.TinyProgress').remove();
     }
 }
 
