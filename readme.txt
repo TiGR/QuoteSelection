@@ -25,8 +25,7 @@ language by adding thie following strings to definitions.php file:
 Known Issues
 ------------
 
-- Button won't appear if user has finished selection somewhere out of comment 
-element box. Suggestions are welcome if you know how to fix that.
+None.
 
 Changes
 -------
@@ -34,8 +33,9 @@ Changes
 ### 0.7 [2010.11.15]
 
 - Fixed bug when "Cancel" button in inline comment edit form was not closing it,
- but redirecting to discussions list page.
+but redirecting to discussions list page.
 - Better support for alternative editors (such as WYSIWYG).
+- New way to determine selection position. Selection problem should be fixed.
 
 ### 0.6 [2010.07.21]
 
@@ -43,9 +43,10 @@ Changes
 
 ### 0.5 [2010.06.24]
 
-- Automatically convert absolute links to anchors only, so that user could jump to comments that are 
- on current page without page reload.
-- Small optimization - use DiscussionController_RenderBefore instead of Base_Render_Before.
+- Automatically convert absolute links to anchors only, so that user could jump 
+to comments that are on current page without page reload.
+- Small optimization - use DiscussionController_RenderBefore instead of 
+Base_Render_Before.
 - JS code rewrite in order to make it reusable, object quoteSelection added.
 
 ### 0.4 [2010.06.20]

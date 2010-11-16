@@ -1,29 +1,36 @@
 quoteSelection = {
 
-    quoteData: {},
-    quoteButton: null,
+    quoteData:      {},
+    quoteButton:    null,
+    range:          null,
+    txt:            "",
+    node:           null,
+    html:           "",
     
     init: function() {
         // we use "mouseup" event since Chrome does not work with "select" one.
-        $("body").mouseup(function(e){
-            if (txt = window.getSelection)
-                txt = window.getSelection().toString();
-            else
-                txt = document.selection.createRange().text;
+        $("body").mouseup(function(e) {
+            quoteSelection._getSelectionData();
             quoteData = {};
             quoteButton = quoteSelection.getQuoteButton(e);
-            if (!txt)
+            if (!html)
                 // no text selected.
                 return true;
-
-            meta = $(e.target).parents("li.Comment").find(".Meta");
-            if (meta.length==0) 
+            
+            $node = $(node);
+            meta = $node.parents("li.Comment").length
+                ? $node.parents("li.Comment").find(".Meta")
+                : $node.find(".Meta");
+            if (meta.length==0) {
                 // selected text does not belong to comments
+                quoteButton.hide(); // in case it was already displayed.
                 return true;
+            }
             quoteData = {
-                text: txt,
+                text:   txt,
                 author: $.trim(meta.find(".Author").text()),
-                url: meta.find(".Permalink a").attr("href")
+                url:    meta.find(".Permalink a").attr("href"),
+                html:   html
             }
             quoteButton.show();
             return false;
@@ -64,6 +71,10 @@ quoteSelection = {
                 $("#Form_Body").parents("div.CommentForm").trigger("resetCommentForm");
                 $("#Form_Body").val(body + quoteSelection.getQuoteText()).focus();
                 $("#quoteButton").hide();
+                if (window.getSelection) 
+                    window.getSelection().empty();
+                else
+                    document.selection.clear();
                 return false;
             });
         }
@@ -94,9 +105,40 @@ quoteSelection = {
             case "html":
             default:
                 return "<blockquote><a href=\"" + quoteData.url + "\">" + title +
-                    "</a>: " + quoteData.text + "</blockquote>" +
+                    "</a>: " + quoteData.html + "</blockquote>" +
                     (visualEditorMode ? "<p>" : "\n\n");
         }
+    },
+    
+    _getSelectionData: function() {
+        if (window.getSelection != undefined) {
+            // The w3c way
+            selection = window.getSelection();
+            node = selection.anchorNode;
+            // endNode = selection.focusNode; // just in case :)
+            if (node != null) {
+                // something selected
+                txt = selection.toString();
+                quoteSelection._getSelectionHTML(selection);
+            }
+        } else {
+            // IE<9 mustdie.
+            range = document.selection.createRange();
+            txt = document.selection.text;
+            html = range.htmlText;
+            node = range.parentElement();
+        }
+    },
+    
+    _getSelectionHTML: function(selection) {
+        range = selection.getRangeAt(0).cloneRange();
+        div = range.startContainer.ownerDocument.createElement("div");
+        div.appendChild(range.cloneContents());
+        html = div.innerHTML;
+        // cleanup:
+        range.detach();
+        delete div;
+        delete range;
     }
 }
 
