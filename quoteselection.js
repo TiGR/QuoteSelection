@@ -124,7 +124,7 @@ quoteSelection = {
         } else {
             // IE<9 mustdie.
             range = document.selection.createRange();
-            txt = selection.text;
+            txt = document.selection.text;
             html = range.htmlText;
             node = range.parentElement();
         }
