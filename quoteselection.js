@@ -13,8 +13,8 @@ quoteSelection = {
             quoteSelection._getSelectionData();
             quoteData = {};
             quoteButton = quoteSelection.getQuoteButton(e);
-            if (!html)
-                // no text selected.
+            if (typeof(html) == 'undefined' || !html || e.target.tagName == 'TEXTAREA')
+                // no text selected or it is edit textarea field.
                 return true;
             
             $node = $(node);
