@@ -29,7 +29,7 @@ quoteSelection = {
             quoteData = {
                 text:   txt,
                 author: $.trim(meta.find(".Author").text()),
-                url:    meta.find(".Permalink a").attr("href"),
+                url:    meta.find(".Permalink").attr("href"),
                 html:   html
             }
             quoteButton.show();
