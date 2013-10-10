@@ -4,7 +4,7 @@
 $PluginInfo['QuoteSelection'] = array(
     'Name' => 'Quote selection',
     'Description' => "Provides a simple tool to quote posts. Users can select text some comment text and click &quot;quote&quot; button that would appear te get formatted quote.",
-    'Version' => '0.7',
+    'Version' => '0.8',
     'HasLocale' => TRUE,
     'Author' => "Igor Tarasov",
     'AuthorEmail' => 'tarasov.igor@gmail.com',
@@ -15,7 +15,7 @@ class QuoteSelectionPlugin extends Gdn_Plugin {
 
     public function DiscussionController_Render_Before(&$Sender) {
         $Session = Gdn::Session();
-        
+
         if ($Session->UserID == 0)
             // we enable this feature only for logged in users and only on discussion page
             return;
@@ -26,7 +26,7 @@ class QuoteSelectionPlugin extends Gdn_Plugin {
         $Sender->AddDefinition("qsQuote", T('Quote'));
         $Sender->AddDefinition("qsQuoteText", T('%s said'));
     }
-    
+
     public function Setup() {}
 
 }
