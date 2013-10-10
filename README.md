@@ -1,4 +1,4 @@
-Quote Selection plugin version 0.7 for Vanilla 2
+Quote Selection plugin version 0.8 for Vanilla 2
 ================================================
 
 About
@@ -30,6 +30,10 @@ None.
 
 Changes
 -------
+
+### 0.8 [2013.10.10]
+
+- Fixed it for new layout.
 
 ### 0.7 [2010.12.10]
 
