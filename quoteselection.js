@@ -18,8 +18,16 @@ quoteSelection = {
                 return true;
             
             $node = $(node);
-            meta = $node.parents("li.Comment").length
-                ? $node.parents("li.Comment").find(".Meta")
+            authorWrap = $node.parents("div.Comment").length
+                ? $node.parents("div.Comment").find(".AuthorWrap")
+                : $node.find(".AuthorWrap");
+            if (authorWrap.length==0) {
+                // selected text does not belong to comments
+                quoteButton.hide(); // in case it was already displayed.
+                return true;
+            }
+            meta = $node.parents("div.Comment").length
+                ? $node.parents("div.Comment").find(".Meta")
                 : $node.find(".Meta");
             if (meta.length==0) {
                 // selected text does not belong to comments
@@ -28,7 +36,7 @@ quoteSelection = {
             }
             quoteData = {
                 text:   txt,
-                author: $.trim(meta.find(".Author").text()),
+                author: $.trim(authorWrap.find(".Author").text()),
                 url:    meta.find(".Permalink").attr("href"),
                 html:   html
             }

@@ -20,8 +20,8 @@ class QuoteSelectionPlugin extends Gdn_Plugin {
             // we enable this feature only for logged in users and only on discussion page
             return;
 
-        $Sender->AddJsFile($this->GetResource('quoteselection.js', FALSE, FALSE));
-        $Sender->AddCssFile($this->GetResource('quoteselection.css', FALSE, FALSE));
+        $Sender->AddJsFile('quoteselection.js',"plugins/QuoteSelection");
+        $Sender->AddCssFile('quoteselection.css',"plugins/QuoteSelection");
         $Sender->AddDefinition('qsInputFormatter', strtolower(Gdn::Config('Garden.InputFormatter')));
         $Sender->AddDefinition("qsQuote", T('Quote'));
         $Sender->AddDefinition("qsQuoteText", T('%s said'));
